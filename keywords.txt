@@ -1,0 +1,14 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+# Class
+MecanumWheel	KEYWORD1
+
+# Methods
+move			KEYWORD2
+stop			KEYWORD2
+
+# Constants (if any)
+FORWARD			KEYWORD3
+BACKWARD		KEYWORD3
