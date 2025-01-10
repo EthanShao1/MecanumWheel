@@ -5,11 +5,13 @@ int frontLeftMotor[] = {43, 41, 2};
 int frontRightMotor[] = {40, 42, 5};
 int backLeftMotor[] = {46, 44, 4};
 int backRightMotor[] = {45, 47, 3};
+// 馬達偏移量（float）
+float motorOffsets[] = {0, 0, 0, 0};
 
 float currentX = 0, currentY = 0, currentRotation = 0;
 
 // 初始化
-MecanumWheel mecanum(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
+MecanumWheel mecanum(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor, motorOffsets);
 
 void setup() {
 }

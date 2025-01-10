@@ -1,15 +1,19 @@
 #include "MecanumWheel.h"
 
-MecanumWheel::MecanumWheel(int frontLeft[3], int frontRight[3], int backLeft[3], int backRight[3]) {
+MecanumWheel::MecanumWheel(int frontLeft[3], int frontRight[3], int backLeft[3], int backRight[3], float motorOffsets[4]) {
     memcpy(_frontLeft, frontLeft, sizeof(_frontLeft));
     memcpy(_frontRight, frontRight, sizeof(_frontRight));
     memcpy(_backLeft, backLeft, sizeof(_backLeft));
     memcpy(_backRight, backRight, sizeof(_backRight));
+    memcpy(_motorOffsets, motorOffsets, sizeof(_motorOffsets));
     for (int i = 0; i < 3; i++) {
         pinMode(_frontLeft[i], OUTPUT);
         pinMode(_frontRight[i], OUTPUT);
         pinMode(_backLeft[i], OUTPUT);
         pinMode(_backRight[i], OUTPUT);
+    }
+    for (int i = 0; i < 4; i++) {
+        _motorOffsets[i] = motorOffsets[i];
     }
 }
 
@@ -19,10 +23,10 @@ void MecanumWheel::move(float xSpeed, float ySpeed, float rotation) {
     float backLeftSpeed = ySpeed - xSpeed + rotation;
     float backRightSpeed = ySpeed + xSpeed - rotation;
 
-    setMotor(_frontLeft, frontLeftSpeed);
-    setMotor(_frontRight, frontRightSpeed);
-    setMotor(_backLeft, backLeftSpeed);
-    setMotor(_backRight, backRightSpeed);
+    setMotor(_frontLeft, frontLeftSpeed + _motorOffsets[0]);
+    setMotor(_frontRight, frontRightSpeed + _motorOffsets[1]);
+    setMotor(_backLeft, backLeftSpeed + _motorOffsets[2]);
+    setMotor(_backRight, backRightSpeed + _motorOffsets[3]);
 }
 
 void MecanumWheel::stop() {
